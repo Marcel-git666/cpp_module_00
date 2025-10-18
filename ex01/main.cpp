@@ -63,7 +63,6 @@ static void handleSearch(const PhoneBook &phoneBook) {
             phoneBook.displayContactByIndex(index);
         else {
             std::cout << "Wrong index." << '\n';
-            index = 0;
         }
     } else {
         std::cout << "Error: Invalid index. Please enter a number." << '\n';
