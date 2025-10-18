@@ -1,44 +1,69 @@
-NAME = phonebook
-CC = c++
-CFLAGS = -Wall -Werror -Wextra -g -std=c++98
+# === Variables ===
 
-# Directories
+# The name of the executable
+NAME = tests
+
+# The compiler
+CC = c++
+
+# Compiler flags as per the subject requirements
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+
+# === Directories ===
+
+# Source files are in the current directory
 SRC_DIR = .
+
+# Object files will be placed here
 OBJ_DIR = obj
 
-# Source files
-SRCS = PhoneBook.cpp main.cpp Contact.cpp
+# === Files ===
 
-# Add src/ prefix to source files
-SRCS_PREFIXED = $(addprefix $(SRC_DIR)/,$(SRCS))
+# List of all source (.cpp) files
+SRCS = Account.cpp \
+       tests.cpp
 
-# Object files
-OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
+# List of all header (.hpp) files for dependency tracking
+HEADERS = Account.hpp \
 
-# Create object directory if it doesn't exist
-$(shell mkdir -p $(OBJ_DIR))
 
-# Rule to build the final executable
+# Generate the list of object files from the source files
+OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+
+# === Rules ===
+
+# Default target.
+# It depends on the $(OBJ_DIR) being created first, then on the executable.
+all: $(OBJ_DIR) $(NAME)
+
+# Rule to create the executable by linking the object files
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@echo "Linking object files to create $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@echo "$(NAME) created successfully."
 
-# Rule to compile .cpp files into .o files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+# Rule to create the object directory if it doesn't exist
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
-# Default target to build everything
-all: $(NAME)
+# Pattern rule to compile a .cpp file into a .o file
+# A target like 'obj/main.o' will depend on 'main.cpp' and all headers.
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean up object files
+# Removes only the object files
 clean:
-	rm -f $(OBJS)
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
+	@echo "Object files removed."
 
-# Clean up object files and the executables
+# Removes object files and the final executable
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "Executable removed."
 
-# Rebuild everything from scratch
+# Forces a full rebuild of the project
 re: fclean all
 
+# Declare targets that are not files
 .PHONY: all clean fclean re

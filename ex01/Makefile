@@ -29,7 +29,6 @@ HEADERS = PhoneBook.hpp \
           Contact.hpp
 
 # Generate the list of object files from the source files
-# This is equivalent to your `cub3d` logic, but adapted for .cpp
 OBJS = $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
 # === Rules ===

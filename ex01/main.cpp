@@ -12,7 +12,6 @@ static void handleAdd(PhoneBook &phoneBook);
 
 int main(void) {
     PhoneBook phoneBook;
-    std::string command_line;
     Contact newContact("Adam", "Zed", "godblessed", "123456", "doesn't exists");
 
     phoneBook.addContact(newContact);
@@ -22,6 +21,7 @@ int main(void) {
 
     while (true) {
         std::cout << "Enter command: ADD, SEARCH, EXIT" << '\n';
+        std::string command_line;
         if (std::getline(std::cin, command_line)) {
             toUpperCase(command_line);
             if (command_line == "EXIT") {
