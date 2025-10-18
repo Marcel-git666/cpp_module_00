@@ -60,7 +60,7 @@ static void handleSearch(const PhoneBook &phoneBook) {
     int index;
     if (ss >> index && !(ss >> std::ws && !ss.eof())) {
         if (index >= 0 && index < phoneBook.numContacts())
-            phoneBook.searchContact(index);
+            phoneBook.displayContactByIndex(index);
         else {
             std::cout << "Wrong index." << "\n";
             index = 0;

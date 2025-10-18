@@ -3,22 +3,20 @@
 
 #include "Contact.hpp"
 
-class PhoneBook
-{
-private:
-	Contact contacts[8];
-	int		contactCount;
-	int		nextIndex;
+class PhoneBook {
+  private:
+    Contact contacts[8];
+    int contactCount;
+    int nextIndex;
 
-public:
-	PhoneBook();
-	~PhoneBook();
+  public:
+    PhoneBook();
 
-	void addContact(const Contact& newContact);
-	void displayContact(const Contact& contact) const;
-	void displayAllContacts() const;
-	void searchContact(int index) const;
-	int numContacts() const;
+    void addContact(const Contact &newContact);
+    void displayContact(const Contact &contact) const;
+    void displayAllContacts() const;
+    void displayContactByIndex(int index) const;
+    int numContacts() const;
 };
 
 #endif
