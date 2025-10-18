@@ -21,7 +21,7 @@ int main(void) {
     phoneBook.displayAllContacts();
 
     while (true) {
-        std::cout << "Enter command: ADD, SEARCH, EXIT" << "\n";
+        std::cout << "Enter command: ADD, SEARCH, EXIT" << '\n';
         if (std::getline(std::cin, command_line)) {
             toUpperCase(command_line);
             if (command_line == "EXIT") {
@@ -37,7 +37,7 @@ int main(void) {
             break;
         }
     }
-    std::cout << "Thanks for using my PhoneBook." << "\n";
+    std::cout << "Thanks for using my PhoneBook." << '\n';
     return 0;
 }
 
@@ -62,7 +62,7 @@ static void handleSearch(const PhoneBook &phoneBook) {
         if (index >= 0 && index < phoneBook.numContacts())
             phoneBook.displayContactByIndex(index);
         else {
-            std::cout << "Wrong index." << "\n";
+            std::cout << "Wrong index." << '\n';
             index = 0;
         }
     } else {
@@ -74,7 +74,7 @@ static void handleAdd(PhoneBook &phoneBook) {
     Contact newContact;
     std::string field;
 
-    std::cout << "Add new contact detils:" << "\n";
+    std::cout << "Add new contact detils:" << '\n';
     field = getInput("First name: ");
     if (std::cin.eof())
         return;

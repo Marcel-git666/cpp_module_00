@@ -30,6 +30,8 @@ class Contact {
     void setNickname(const std::string &nickname);
     void setPhoneNumber(const std::string &phoneNumber);
     void setDarkestSecret(const std::string &darkestSecret);
+
+    void display() const;
 };
 
 #endif
