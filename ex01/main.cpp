@@ -12,12 +12,6 @@ static void handleAdd(PhoneBook &phoneBook);
 
 int main(void) {
     PhoneBook phoneBook;
-    Contact newContact("Adam", "Zed", "godblessed", "123456", "doesn't exists");
-
-    phoneBook.addContact(newContact);
-    newContact.setFirstName("Vitezslav Lockheart");
-    phoneBook.addContact(newContact);
-    phoneBook.displayAllContacts();
 
     while (true) {
         std::cout << "Enter command: ADD, SEARCH, EXIT" << '\n';
@@ -48,6 +42,10 @@ static void toUpperCase(std::string &str) {
 }
 
 static void handleSearch(const PhoneBook &phoneBook) {
+    if (phoneBook.numContacts() == 0) {
+        std::cout << "PhoneBook is empty\n";
+        return;
+    }
     phoneBook.displayAllContacts();
     std::cout << "Enter index: ";
     std::string line;
@@ -70,35 +68,33 @@ static void handleSearch(const PhoneBook &phoneBook) {
 }
 
 static void handleAdd(PhoneBook &phoneBook) {
-    Contact newContact;
-    std::string field;
+    std::string firstName;
+    std::string lastName;
+    std::string nickname;
+    std::string phoneNumber;
+    std::string darkestSecret;
 
-    std::cout << "Add new contact detils:" << '\n';
-    field = getInput("First name: ");
+    std::cout << "Add new contact details:" << '\n';
+    firstName = getInput("First name: ");
     if (std::cin.eof())
         return;
-    newContact.setFirstName(field);
-
-    field = getInput("Last name: ");
+    lastName = getInput("Last name: ");
     if (std::cin.eof())
         return;
-    newContact.setLastName(field);
-
-    field = getInput("Nickname: ");
+    nickname = getInput("Nickname: ");
     if (std::cin.eof())
         return;
-    newContact.setNickname(field);
 
-    field = getInput("Phone number: ");
+    phoneNumber = getInput("Phone number: ");
     if (std::cin.eof())
         return;
-    newContact.setPhoneNumber(field);
 
-    field = getInput("Darkest secret: ");
+    darkestSecret = getInput("Darkest secret: ");
     if (std::cin.eof())
         return;
-    newContact.setDarkestSecret(field);
 
+    Contact newContact(firstName, lastName, nickname, phoneNumber,
+                       darkestSecret);
     phoneBook.addContact(newContact);
     std::cout << "Contact added successfully!" << '\n';
 }
